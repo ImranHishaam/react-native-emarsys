@@ -1,0 +1,21 @@
+{
+    "globals": {
+        "fetch": false
+    },
+    "extends": "airbnb",
+    "rules": {
+        "no-console": "off",
+        "no-underscore-dangle": "off",
+        "indent": ["error", 4],
+        "jsx-a11y/href-no-hash": "off",
+        "no-unused-expressions": "off",
+        "import/prefer-default-export": "off",
+        "no-nested-ternary": "off",
+        "react/prefer-stateless-function": "off",
+        "no-use-before-define": "off",
+        "react/jsx-indent": "off",
+        "react/jsx-indent-props": "off",
+        "react/jsx-filename-extension": "off",
+        "react/no-multi-comp": "off"
+    }
+}

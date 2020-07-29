@@ -1,53 +1,118 @@
+# @leciseau/react-native-emarsys
 
-# react-native-react-native-emarsys
+## 1. Install the React Native Emarsys plugin
 
-## Getting started
+`$ npm install @leciseau/react-native-emarsys --save`
 
-`$ npm install react-native-react-native-emarsys --save`
+OR
 
-### Mostly automatic installation
+`$ yarn add @leciseau/react-native-emarsys`
 
-`$ react-native link react-native-react-native-emarsys`
+## 2 Install the native SDK
 
-### Manual installation
+#### iOS (Cocoapods)
 
+1. Go to `/ios`
+2. If you don't have a Podfile yet run `pod init`
+3. Run `pod install`
+4. You should now open your project with the `.xcworkspace` instead of the `.xcodeproj`
+
+#### Android (Gradle)
+
+1. Go to `src/app/build.gradle`
+2. In `dependencies` add
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.emarsys:emarsys-sdk:2.5.4'
+  ...
+}
+```
+
+## 3 Init SDK
 
 #### iOS
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-react-native-emarsys` and add `RNReactNativeEmarsys.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNReactNativeEmarsys.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+1. Go to `AppDelegate.m`
+2. Add
+
+```objective-c
+...
+#import "EMSConfig.h"
+#import "Emarsys.h"
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    ...
+    EMSConfig *config = [EMSConfig makeWithBuilder:^(EMSConfigBuilder *builder) {
+        [builder setMobileEngageApplicationCode:<applicationCode: NSString>];
+        [builder setContactFieldId:<contactFieldId: NSNumber>];
+        [builder setMerchantId:<predictMerchantId: NSString>];
+    }];
+    [Emarsys setupWithConfig:config];
+    ...
+}
+```
 
 #### Android
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNReactNativeEmarsysPackage;` to the imports at the top of the file
-  - Add `new RNReactNativeEmarsysPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-react-native-emarsys'
-  	project(':react-native-react-native-emarsys').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-react-native-emarsys/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-react-native-emarsys')
-  	```
+1. Go to `MainApplication.java`
+2. Add
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
+```java
+...
+import com.emarsys.Emarsys;
+import com.emarsys.config.EmarsysConfig;
 
-1. In Visual Studio add the `RNReactNativeEmarsys.sln` in `node_modules/react-native-react-native-emarsys/windows/RNReactNativeEmarsys.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using React.Native.Emarsys.RNReactNativeEmarsys;` to the usings at the top of the file
-  - Add `new RNReactNativeEmarsysPackage()` to the `List<IReactPackage>` returned by the `Packages` method
+@Override
+public void onCreate() {
+  super.onCreate();
+  ...
+  EmarsysConfig config = new EmarsysConfig.Builder()
+    .application(this)
+    .mobileEngageApplicationCode(<applicationCode:String?>)
+    .contactFieldId(<contactFieldId: Integer>)
+    .predictMerchantId(<predictMerchantId:String?>)
+    .inAppEventHandler(getInAppEventHandler())
+    .notificationEventHandler(getNotificationEventHandler())
+    .build();
 
+    Emarsys.setup(config);
+}
+```
 
 ## Usage
 ```javascript
-import RNReactNativeEmarsys from 'react-native-react-native-emarsys';
+import RNEmarsys from '@leciseau/react-native-emarsys';
+// or
+import {
+    trackCustomEvent,
+    trackTag,
+    setContact,
+    clearContact,
+    trackCart,
+    trackPurchase,
+    trackItemView,
+    trackCategoryView,
+    trackSearchTerm,
+} from '@leciseau/react-native-emarsys';
 
-// TODO: What to do with the module?
-RNReactNativeEmarsys;
+RNEmarsys.trackCustomEvent('myEvent', { toto: "titi" });
+RNEmarsys.trackTag('myTag', { toto: "titi" });
+RNEmarsys.setContact('userId');
+RNEmarsys.clearContact();
+RNEmarsys.trackCart([{
+    item: 'myItem',
+    quantity: '1',
+    price: '12.34',
+}]);
+RNEmarsys.trackPurchase('idPurchase', [{
+    item: 'myItem',
+    quantity: '1',
+    price: '12.34',
+}]);
+RNEmarsys.trackItemView('myItemId');
+RNEmarsys.trackCategoryView('myCategoryPath');
+RNEmarsys.trackSearchTerm('mySearchTerm');
 ```
-  

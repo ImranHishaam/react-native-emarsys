@@ -1,18 +1,36 @@
 {
-  "name": "react-native-emarsys",
-  "version": "2.0.1",
-  "description": "",
+  "name": "@leciseau/react-native-emarsys",
+  "version": "1.0.0",
+  "description": "A simple bridge between emarsys sdk and react-native",
   "main": "index.js",
+  "homepage": "https://github.com/LeCiseau/react-native-emarsys.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "emarsys"
   ],
-  "author": "",
-  "license": "",
+  "author": {
+    "name": "John Langan",
+    "url": "https://github.com/langan"
+  },
+  "contributors": {
+    "name": "LeCiseau",
+    "url": "https://github.com/LeCiseau",
+    "email": "tech@leciseau.fr"
+  },
+  "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.41.2",
+    "react-native": "^0.60.2",
     "react-native-windows": "0.41.0-rc.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^1.8.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2"
   }
 }

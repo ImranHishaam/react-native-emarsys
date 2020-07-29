@@ -3,7 +3,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RNReactNativeEmarsys.xcodeproj">
+      location = "group:RNEmarsys.xcodeproj">
    </FileRef>
 </Workspace>
   

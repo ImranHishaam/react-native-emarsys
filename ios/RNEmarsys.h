@@ -5,9 +5,8 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
-@interface RNReactNativeEmarsys : NSObject <RCTBridgeModule>
+@interface RNEmarsys : NSObject <RCTBridgeModule>
 +(void)init:(NSString *)applicationCode contactFieldId:(NSNumber *)contactFieldId;
 +(void)setPushToken:(NSData *)deviceToken;
 +(void)trackMessageOpenWithUserInfo:(NSDictionary *)userInfo;
 @end
-
