@@ -2,6 +2,7 @@
 #import <React/RCTLog.h>
 #import "EMSConfig.h"
 #import "Emarsys.h"
+#import "EMSCartItem.h"
 #import <React/RCTConvert.h>
 
 @implementation RNEmarsys
@@ -105,16 +106,24 @@ RCT_EXPORT_METHOD(clearContact)
     }];
 }
 
-RCT_EXPORT_METHOD(trackCart:(NSArray *)cartItems)
+RCT_EXPORT_METHOD(trackCart:(NSArray <NSDictionary *> *)cartItems)
 {
     RCTLogInfo(@"RNEmarsys - track cart");
-    [Emarsys.predict trackCartWithCartItems:cartItems];
+    for (id object in cartItems) {
+        [Emarsys.predict trackCartWithCartItems:@[
+                [EMSCartItem itemWithItemId:[object objectForKey:@"item"] price:[[object objectForKey:@"price"] doubleValue] quantity:[[object objectForKey:@"quantity"] doubleValue]]
+        ]];
+    }
 }
 
-RCT_EXPORT_METHOD(trackPurchase:(NSString *)orderId items:(NSArray *)items)
+RCT_EXPORT_METHOD(trackPurchase:(NSString *)orderId items:(NSArray <NSDictionary *> *)items)
 {
     RCTLogInfo(@"RNEmarsys - track purchase");
-    [Emarsys.predict trackPurchaseWithOrderId:orderId items:items];
+    for (id object in items) {
+        [Emarsys.predict trackPurchaseWithOrderId:orderId items:@[
+                [EMSCartItem itemWithItemId:[object objectForKey:@"item"] price:[[object objectForKey:@"price"] doubleValue] quantity:[[object objectForKey:@"quantity"] doubleValue]]
+        ]];
+    }
 }
 
 RCT_EXPORT_METHOD(trackItemView:(NSString *)itemId)
