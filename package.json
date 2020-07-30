@@ -1,6 +1,6 @@
 {
   "name": "@leciseau/react-native-emarsys",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple bridge between emarsys sdk and react-native",
   "main": "index.js",
   "devDependencies": {
