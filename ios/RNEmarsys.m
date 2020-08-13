@@ -109,6 +109,10 @@ RCT_EXPORT_METHOD(clearContact)
 RCT_EXPORT_METHOD(trackCart:(NSArray <NSDictionary *> *)cartItems)
 {
     RCTLogInfo(@"RNEmarsys - track cart");
+    if (cartItems.count <= 0) {
+        [Emarsys.predict trackCartWithCartItems:@[]];
+        return;
+    }
     for (id object in cartItems) {
         [Emarsys.predict trackCartWithCartItems:@[
                 [EMSCartItem itemWithItemId:[object objectForKey:@"item"] price:[[object objectForKey:@"price"] doubleValue] quantity:[[object objectForKey:@"quantity"] doubleValue]]
