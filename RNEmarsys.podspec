@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
   s.module_name  = "RNEmarsys"
 
   s.dependency "React"
-  s.dependency "EmarsysSDK" , '~> 2.5.5'
+  s.dependency "EmarsysSDK" , '~> 2.9.1'
 
 end
